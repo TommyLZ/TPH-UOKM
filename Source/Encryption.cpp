@@ -42,27 +42,27 @@ void Encryption(char* pw)
     element_t PK;
     element_init_G1(PK, pairing);
     load_key_from_file(PK, "../Store/PK.bin");
-    element_printf("PK=%B\n", PK);
+    // element_printf("PK=%B\n", PK);
 
     // Caculate a symmetric key
     element_t h_input;
     element_init_G1(h_input, pairing);
     element_pow_zn(h_input, PK, r);
-    element_printf("The input is %B\n", h_input);
+    // element_printf("The input is %B\n", h_input);
     
     // Transform element_t to char*
     char h_input_str[1024];
     element_snprint(h_input_str, sizeof(h_input), h_input);
-    cout << "h_input_str" << h_input_str << endl;
+    // cout << "h_input_str" << h_input_str << endl;
 
     element_t ek;
     element_init_Zr(ek, pairing);
     element_from_hash(ek, h_input_str, strlen(h_input_str));
-    element_printf("The ek is %B\n", ek);
+    // element_printf("The ek is %B\n", ek);
     
     char ek_str[1024];
     element_snprint(ek_str, 33, ek);
-    cout << "ek_str: " << ek_str << endl;
+    // cout << "ek_str: " << ek_str << endl;
    
     // Generate the symmetric key and encrypt
     CryptoPP::byte ek_aes[16];

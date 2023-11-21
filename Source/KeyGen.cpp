@@ -31,6 +31,8 @@ void save_keys_to_file(element_t *keys, const char *filename)
 
 void KeyGen(char *pw)
 {
+	cout << "***********************************KeyGen Phase*************************************" << endl;
+    
     // Select a random
     element_t s_eta;
     element_init_Zr(s_eta, pairing);
@@ -45,7 +47,7 @@ void KeyGen(char *pw)
     // Compute shares of s_eta
     element_t shares[n + 1]; // Record the shares
     element_t coeff[t];      // Coefficient
-    element_printf("The secret shared is %B \n", s_eta);
+    // element_printf("The secret shared is %B \n", s_eta);
     secretShare(s_eta, shares, coeff);
     // for (int i = 1; i <= t; i++)
     // {
@@ -64,12 +66,12 @@ void KeyGen(char *pw)
     element_t h_2;
     element_init_G1(h_2, pairing);
     element_from_hash(h_2, pw, strlen(pw));
-    element_printf("h_2=%B\n", h_2);
+    // element_printf("h_2=%B\n", h_2);
 
     element_t s_eta_mul_h2;
     element_init_G1(s_eta_mul_h2, pairing);
     element_pow_zn(s_eta_mul_h2, h_2, s_eta);
-    element_printf("sigma=%B\n", s_eta_mul_h2);
+    // element_printf("sigma=%B\n", s_eta_mul_h2);
 
     // Transform element_t to char*
     char s_eta_mul_h2_str[1024];
@@ -82,14 +84,14 @@ void KeyGen(char *pw)
     element_t SK;
     element_init_Zr(SK, pairing);
     element_from_hash(SK, input, strlen(input));
-    element_printf("SK=%B\n", SK);
+    // element_printf("SK=%B\n", SK);
 
     // Computes the public key
     element_t PK;
     element_init_G1(PK, pairing);
     element_pow_zn(PK, P, SK);
-    element_printf("P=%B\n", P);
-    element_printf("PK=%B\n", PK);
+    // element_printf("P=%B\n", P);
+    // element_printf("PK=%B\n", PK);
 
     // Store
     save_key_to_file(PK, "../Store/PK.bin");

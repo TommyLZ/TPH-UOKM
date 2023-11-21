@@ -17,7 +17,6 @@
 #include <cryptopp/modes.h>
 #include <cryptopp/base64.h>
 #include <cryptopp/files.h>
-#include <cryptopp/eax.h>
 #include <pbc/pbc.h>
 
 using namespace std;
@@ -26,13 +25,13 @@ using namespace CryptoPP;
 pairing_t pairing;
 element_t P;
 
-int n = 2; // Number of key servers
-int t = 2; // Threshold
+int n = 10; // Number of key servers
+int t = 6; // Threshold
 
 // System Initialization
 void paramSetup()
 {
-    cout << "*********************************Parameter Setup********************************" << endl;
+    cout << "*********************************Parameter Setup************************************" << endl;
     // Set pbc param
     char param[1024];
     size_t count = fread(param, 1, 1024, stdin);
@@ -45,7 +44,6 @@ void paramSetup()
     // Declare and initialize variables
     element_init_G1(P, pairing);
     element_random(P);
-    element_printf("p=%B\n", P);
 
     cout << "System parameter setup finished!" << endl;
 }
