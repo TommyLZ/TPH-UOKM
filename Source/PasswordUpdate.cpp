@@ -145,20 +145,20 @@ void PasswordUpdate(char *pw, char* pw_new)
     element_t SK_1;
     element_init_Zr(SK_1, pairing);
     element_from_hash(SK_1, input1, strlen(input1));
-    element_printf("SK=%B\n", SK_1);
+    // element_printf("SK=%B\n", SK_1);
 
     // Computes the password-derived key
     element_t SK_2;
     element_init_Zr(SK_2, pairing);
     element_from_hash(SK_2, input2, strlen(input1));
-    element_printf("SK=%B\n", SK_2);
+    // element_printf("SK=%B\n", SK_2);
 
     // Computes the public key
     element_t PK;
     element_init_G1(PK, pairing);
     element_pow_zn(PK, P, SK_2);
-    element_printf("P=%B\n", P);
-    element_printf("PK=%B\n", PK);
+    // element_printf("P=%B\n", P);
+    // element_printf("PK=%B\n", PK);
 
     // Store
     save_key_to_file(PK, "../Store/PK.bin");
@@ -192,4 +192,5 @@ void PasswordUpdate(char *pw, char* pw_new)
          element_pow_zn(R, R, delta);
     }
     saveDataToBinFile(R, tau, cipher, "../Store/CS_store.bin");
+	cout << "***********************************PasswordUpdate Phase Finished*********************************" << endl;
 }

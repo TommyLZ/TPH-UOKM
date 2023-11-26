@@ -119,6 +119,8 @@ void KeyServerUpdate(char *pw)
             cout << "fails" << endl;
         }
     }
+    
+    cout << "The verification success!" << endl;
 
     element_t renewed_share[n + 1]; 
     element_t renewed_share_public_key[n + 1];
@@ -138,4 +140,6 @@ void KeyServerUpdate(char *pw)
 
         element_pow_zn(renewed_share_public_key[j], P, renewed_share[j]);
     }
+
+    cout << "***********************************KeyServerUpdate Phase Finished*********************************" << endl;
 }
